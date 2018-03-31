@@ -22,7 +22,12 @@ public class FileSetting {
                 int i=0;
                 while (stringTokenizer.hasMoreElements()){
                     Contact.word.add(stringTokenizer.nextToken());
-
+                    if(Contact.word.get(Contact.word.size()-1).contains(",")){
+                        String aa = Contact.word.get(Contact.word.size()-1).substring(0,Contact.word.get(Contact.word.size()-1).length()-1);
+                        Contact.word.remove(Contact.word.size()-1);
+                        Contact.word.add(aa);
+                        Contact.word.add(",");
+                    }
                 }
                 if(Contact.word.get(Contact.word.size()-1).contains(".")){
                     //System.out.println(Contact.word.get(Contact.word.size()-1));
@@ -30,6 +35,7 @@ public class FileSetting {
                     Contact.word.remove(Contact.word.size()-1);
                     Contact.word.add(aa);
                 }
+
 
                 /*for(int i=0;stringTokenizer.hasMoreElements();i++) {
                     if(stringTokenizer.)
@@ -53,10 +59,6 @@ public class FileSetting {
 
             }*/
 
-            //System.out.println(Contact.word.get(34));
-            /*if(Contact.word.get(34).isEmpty()){
-                System.out.println("!!!!!!!!!!!");
-            }*/
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
