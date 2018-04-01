@@ -5,7 +5,22 @@ public class FileSetting {
     public FileSetting() {
 
     }
-
+    public void deWrite(){
+        for(int i=0;i<Contact.findword.size();i++){
+            System.out.println(Contact.findword.get(i));
+        }
+        System.out.println("총 갯수 --------->" + Contact.findword.size());
+        try {
+            PrintWriter writer = new PrintWriter("C:\\Users\\gyun_home\\Desktop\\hw2-out.txt");
+            for(int i=0;i<Contact.findword.size();i++){
+                writer.println(Contact.findword.get(i));
+            }
+            writer.println("Total Data Pattern----------> " + Contact.findword.size());
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public void doSetting() {
         String[] splite = null;
         StringTokenizer stringTokenizer;
@@ -53,7 +68,7 @@ public class FileSetting {
             }
             bufferedReader.close();
 
-            /*for (int i = 0; i < Contact.word.size(); i++) {
+           /* for (int i = 0; i < Contact.word.size(); i++) {
 
                 System.out.println(Contact.word.get(i));
 

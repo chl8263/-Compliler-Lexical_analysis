@@ -15,16 +15,17 @@ public class Run {
         init();
         analysis();
         //test();
+        fileSetting.deWrite();
     }
 
     public void analysis() {
         String table[][] = {
                 //month  / num / num1 / num2 / ,
-                {"_DT_MONTH", "x", "_DT_NUM2", "x", "x", "NOT"},  //_DT_START
+                {"_DT_MONTH", "_DT_NUM2", "_DT_NUM2", "_DT_NUM2", "x", "NOT"},  //_DT_START
                 {"x", "_DT_NUM1", "_DT_NUM1", "_DT_NUM1", "_DT_COM1", "NOT"},   //_DT_MONTH
                 {"x", "_DT_NUM1", "_DT_NUM1", "_DT_NUM1", "x", "NOT"},   //_DT_COM1
                 {"x", "x", "x", "x", "_DT_COM2", "A_5"},   //_DT_NUM1
-                {"x", "x", "x", "x", "x", "NOT"},   //_DT_COM2
+                {"x", "A_1_2", "A_1_2", "A_1_2", "A_4", "A_4"},   //_DT_COM2
                 {"x", "x", "x", "x", "_DT_COM3", "NOT"},   //_DT_NUM2
                 {"A_3", "x", "x", "x", "x", "NOT"}    //_DT_COM3
         };
@@ -89,10 +90,14 @@ public class Run {
             System.out.println("_DT_COM2");
             return 4;
         } else if (msg.equals("_DT_NUM2")) {
-            result += nowString+ " ";
-            System.out.println(result);
-            System.out.println("_DT_NUM2");
-            return 5;
+            if(Integer.parseInt(nowString) > 31){
+                return 0;
+            }else {
+                result += nowString + " ";
+                System.out.println(result);
+                System.out.println("_DT_NUM2");
+                return 5;
+            }
         } else if (msg.equals("_DT_COM3")) {
             result += nowString+ " ";
             System.out.println(result);
@@ -102,27 +107,35 @@ public class Run {
             System.out.println("A_1_2");
             result += nowString;
             System.out.println(result+"\n");
+            Contact.findword.add(result);
+            result = "";
             return 0;
         } else if (msg.equals("A_3")) {
             System.out.println("A_3");
+            result += nowString;
             System.out.println(result+"\n");
+            Contact.findword.add(result);
+            result = "";
             return 0;
         } else if (msg.equals("A_4")) {
             System.out.println("A_4");
-            System.out.println(result+"\n");
+            String A_4Result = result.substring(0,result.length()-2);
+            System.out.println(A_4Result+"\n");
+            Contact.findword.add(A_4Result);
+            result = "";
             return 0;
         } else if (msg.equals("A_5")) {
             System.out.println("A_5");
             System.out.println(result+"\n");
+            Contact.findword.add(result);
+            result = "";
             return 0;
         } else {
             return nothing;
         }
     }
 
-    public void test() {
 
-    }
 
     private void init() {
         month = new String[]{"Jan.", "January", "Feb.", "February", "Mar.", "March", "Apr.", "April", "May.", "May",
